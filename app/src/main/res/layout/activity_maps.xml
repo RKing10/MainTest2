@@ -20,17 +20,18 @@
         android:text="Menu" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/TF_location"
         android:layout_width="246dp"
         android:layout_height="47dp"
         android:layout_marginLeft="100dp"
         android:text="Type" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/B_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="350dp"
+        android:onClick="onClick"
         android:text="Search" />
 
     <Button
