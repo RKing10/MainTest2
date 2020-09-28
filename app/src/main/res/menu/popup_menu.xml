@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item   android:id="@+id/filter_area"
+        android:title="Showing By Area"/>
+    <item   android:id="@+id/filter_pricing"
+        android:title="Showing By Pricing"/>
+    <item   android:id="@+id/filter_bhk"
+        android:title="Showing By BHK"/>
+    <item   android:id="@+id/filter_pg"
+        android:title="Showing By PG/Flat"/>
+
+</menu>
