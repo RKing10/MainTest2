@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -48,6 +49,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
 import java.security.PublicKey;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
@@ -63,10 +65,33 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public static final int REQUEST_LOCATION_CODE = 99;
     Button button4;
 
+    ArrayList<LatLng> arrayList = new ArrayList<LatLng>();
+    LatLng sydney = new LatLng(-34, 151);
+    LatLng Tamworth = new LatLng(-31, 150);
+    LatLng Newcastle = new LatLng(-32, 151);
+    LatLng Brisbane = new LatLng(-27, 153);
+    LatLng Dubbo = new LatLng(-32, 148);
+
+    ArrayList<String> title = new ArrayList<String>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
+        arrayList.add(sydney);
+        arrayList.add(Tamworth);
+        arrayList.add(Newcastle);
+        arrayList.add(Brisbane);
+        arrayList.add(Dubbo);
+
+        title.add("Sydney");
+        title.add("Tamworth");
+        title.add("Newcastle");
+        title.add("Brisbane");
+        title.add("Dubbo");
+
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPermission();
@@ -141,6 +166,31 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_baseline_accessibility_new_24)));
         mMap.addMarker(new MarkerOptions().position(sehore).title("Marker in Sehore")
                 .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_baseline_accessibility_new_24)));
+
+        for (int i=0; i < arrayList.size();i++) {
+
+            for (int j =0; j<title.size();j++) {
+
+                mMap.addMarker(new MarkerOptions().position(arrayList.get(i)).title(String.valueOf(title.get(i))));
+            }
+            
+        }
+
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                String markertitle = marker.getTitle();
+
+                Intent i = new Intent(MapsActivity.this, DetailsActivity.class);
+                i.putExtra("title", markertitle);
+                startActivity(i);
+
+
+                return false;
+            }
+        });
+
+
 
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
